@@ -52,6 +52,7 @@
 </xsl:for-each>
 
 #pragma warning(pop)
+extern int iterationCount;
 
 /* Error check function for safe CUDA API calling */
 #define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
@@ -551,6 +552,7 @@ void singleIteration(){
 	cudaEventElapsedTime(&amp;instrument_iteration_milliseconds, instrument_iteration_start, instrument_iteration_stop);
 	printf("Instrumentation: Iteration Time = %f (ms)\n", instrument_iteration_milliseconds);
 #endif
+iterationCount +=1;
 }
 
 /* Environment functions */
