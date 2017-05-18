@@ -31,6 +31,7 @@
 /* IO Variables*/
 char inputfile[100];          /**&lt; Input path char buffer*/
 char outputpath[1000];         /**&lt; Output path char buffer*/
+int iterationCount = 0;
 
 #define OUTPUT_TO_XML 1
 
