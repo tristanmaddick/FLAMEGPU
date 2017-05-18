@@ -23,6 +23,8 @@
 #include "NavMapPopulation.h"
 #include "GlobalsController.h"
 #include "MenuDisplay.h"
+#include <cuda_runtime.h>
+#include "header.h"
 
 //viewpoint vectors and eye distance
 float eye[3];
@@ -40,6 +42,9 @@ float sin_phi;
 int mouse_old_x, mouse_old_y;
 
 int zoom_key = 0;
+
+extern char outputpath[1000];
+extern int iterationCount;
 
 #define TRANSLATION_SCALE 0.005f
 #define ROTATION_SCALE 0.01f
@@ -269,7 +274,15 @@ void keyboard( unsigned char key, int x, int y)
 			zoom_key = !zoom_key;
 			break;
 		}
-		
+		case('p'):
+		{
+			saveIterationData(outputpath, iterationCount,
+                              	//default state agent agents
+                                get_host_agent_default_agents(), get_device_agent_default_agents(), get_agent_agent_default_count(),
+                                //static state navmap agents
+                                get_host_navmap_static_agents(), get_device_navmap_static_agents(), get_agent_navmap_static_count());
+			break;
+		}	
 
 		//exit
 		case('q') :
